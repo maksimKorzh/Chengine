@@ -49,7 +49,9 @@ enum squares
 	a5 = 64, b5, c5, d5, e5, f5, g5, h5,
 	a6 = 80, b6, c6, d6, e6, f6, g6, h6,
 	a7 = 96, b7, c7, d7, e7, f7, g7, h7,
-	a8 = 112, b8, c8, d8, e8, f8, g8, h8
+	a8 = 112, b8, c8, d8, e8, f8, g8, h8,
+	
+	noSq = -99
 };
 
 enum castling
@@ -71,6 +73,10 @@ typedef struct
 
 CHESSBOARD;
 
+extern int knightAttacks[8];
+extern int kingAttacks[8];
+extern int bishopAttacks[4];
+extern int rookAttacks[4];
 
 // functions
 
@@ -80,5 +86,12 @@ void ParseFen(CHESSBOARD *board, char *fen);
 void PrintPosition(CHESSBOARD *board);
 void PrintBoard(CHESSBOARD *board);
 
+// attack.c
+int IsSquareAttacked(CHESSBOARD *board, int sq, int side);
+void PrintAttackBoard(CHESSBOARD *board, int side);
+
 
 #endif
+
+
+

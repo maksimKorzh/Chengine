@@ -12,7 +12,7 @@ void InitBoard(CHESSBOARD *board)
 			if(file < 8)
 			{
 				assert(!(sq & 0x88));
-				board->position[sq] = 0;
+				board->position[sq] = emSq;
 			}
 			
 			else
@@ -21,7 +21,7 @@ void InitBoard(CHESSBOARD *board)
 	}
 	
 	board->side = -1;
-	board->enPassant = -1;
+	board->enPassant = noSq;
 	board->castling = 0;
 }
 
@@ -65,13 +65,14 @@ void ParseFen(CHESSBOARD *board, char *fen)
 					if(board->position[sq] == 0)
 						file++;
 			
-					for(int i = 0; i < count; ++i)
+					/*for(int i = 0; i < count; ++i)
 					{	
 						file--;
 						
 						int empty = rank * 16 - file;
 						board->position[empty] = emSq;	
-					}
+					}*/
+					file -= count;
 					
 					*fen++;
 				}
