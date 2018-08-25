@@ -32,12 +32,12 @@ enum pieces
 	wQ = 5,
 	wK = 6,
 	
-	bP = -1,
-	bN = -2,
-	bB = -3,
-	bR = -4,
-	bQ = -5,
-	bK = -6
+	bP = 9,
+	bN = 10,
+	bB = 11,
+	bR = 12,
+	bQ = 13,
+	bK = 14
 };
 
 enum squares
@@ -62,6 +62,32 @@ enum castling
 	bq = 8
 };
 
+
+// Move format
+
+/*
+
+ 0000 0000 0111 1111	fromSq     (0x7f)
+ 0011 1111 1000 0000	toSq >> 7, (0x3f)
+*/
+
+typedef struct
+{
+	unsigned int move;
+	int score;
+}
+
+MOVE;
+
+typedef struct
+{
+	MOVE move[256];
+	int count;
+}
+
+MOVELIST;
+
+
 typedef struct
 {
 	int position[128];
@@ -81,14 +107,17 @@ extern int rookAttacks[4];
 // functions
 
 // board.c
-void InitBoard(CHESSBOARD *board);
-void ParseFen(CHESSBOARD *board, char *fen);
-void PrintPosition(CHESSBOARD *board);
-void PrintBoard(CHESSBOARD *board);
+extern void InitBoard(CHESSBOARD *board);
+extern void PrintSquare(int sq);
+extern void PrintMove(unsigned int move);
+extern void PrintMoveBinary(unsigned int move);
+extern void ParseFen(CHESSBOARD *board, char *fen);
+extern void PrintPosition(CHESSBOARD *board);
+extern void PrintBoard(CHESSBOARD *board);
 
 // attack.c
-int IsSquareAttacked(CHESSBOARD *board, int sq, int side);
-void PrintAttackBoard(CHESSBOARD *board, int side);
+extern int IsSquareAttacked(CHESSBOARD *board, int sq, int side);
+extern void PrintAttackBoard(CHESSBOARD *board, int side);
 
 
 #endif

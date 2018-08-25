@@ -123,6 +123,48 @@ void ParseFen(CHESSBOARD *board, char *fen)
 }
 
 
+void PrintSquare(int sq)
+{
+	assert(!(sq & 0x88));
+	
+	char file = (sq & 7) + 'a';
+	char rank = (sq >> 4) + '1';
+	
+	printf("%c%c", file, rank);
+}
+
+
+void PrintMove(unsigned int move)
+{
+	printf("0x%x\n", move);
+}
+
+
+void PrintMoveBinary(unsigned int move)
+{
+	int fourCount = -1;
+
+	for(int i = 31; i >= 0; i--)
+	{
+		fourCount++;
+		
+		if(fourCount == 4)
+		{
+			printf(" ");
+			fourCount = 0;
+		}
+		
+		if((move >> i) & 1)
+			printf("1");
+		
+		else
+			printf("0");
+	}
+	
+	printf("\n");
+}
+
+
 void PrintPosition(CHESSBOARD *board)
 {
 	printf("\n");	
@@ -133,7 +175,7 @@ void PrintPosition(CHESSBOARD *board)
 		{
 			int sq = rank * 16 - file;
 			
-			board->position[sq] < 0 ?
+			board->position[sq] > 9 ?
 				printf(" %d", board->position[sq]) : printf("  %d", board->position[sq]);
 		}
 		

@@ -9,8 +9,13 @@ int main()
 	
 	PrintPosition(board);
 	PrintBoard(board);
-	
 	PrintAttackBoard(board, black);
+	
+	unsigned int a = 0xf0ffffff;
+	
+	PrintMoveBinary(8);
+	
+	
 	
 	return 0;
 }
