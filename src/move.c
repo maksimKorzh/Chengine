@@ -14,97 +14,100 @@
 
 */
 
-void SetMove(MOVE *move, int fromSq, int toSq, int promPiece, int pawnFlag, int enPassantFlag, int castleFlag)
+int SetMove(int fromSq, int toSq, int promPiece, int pawnFlag, int enPassantFlag, int castleFlag)
 {
 	assert(!(fromSq & 0x88));
 	assert(!(toSq & 0x88));
-	assert((promPiece >= wN && promPiece <= wQ) || (promPiece >= bN && promPiece <= bQ));
+	assert((promPiece >= wN && promPiece <= wQ) || (promPiece >= bN && promPiece <= bQ) || promPiece == 0);
 	
-	move->move |= fromSq;
-	move->move <<= 7;
+	int move = 0;
 	
-	move->move |= toSq;
-	move->move <<= 4;
+	move |= fromSq;
+	move <<= 7;
 	
-	move->move |= promPiece;
-	move->move <<= 1;
+	move |= toSq;
+	move <<= 4;
 	
-	move->move |= pawnFlag;
-	move->move <<= 1;
+	move |= promPiece;
+	move <<= 1;
 	
-	move->move |= enPassantFlag;
-	move->move <<= 1;
+	move |= pawnFlag;
+	move <<= 1;
 	
-	move->move |= castleFlag;
+	move |= enPassantFlag;
+	move <<= 1;
+	
+	move |= castleFlag;
+	
+	return move;
 }
 
 
-int GetMoveSource(MOVE *move)
+int GetMoveSource(int move)
 {
 	int fromSq;
 	
-	fromSq = move->move & 0x1fc000;
+	fromSq = move & 0x1fc000;
 	fromSq >>= 14;
 	
 	return fromSq;
 }
 
 
-int GetMoveTarget(MOVE *move)
+int GetMoveTarget(int move)
 {
 	int toSq;
 	
-	toSq = move->move & 0x3f80;
+	toSq = move & 0x3f80;
 	toSq >>= 7;
 	
 	return toSq;
 }
 
 
-int GetMovePromPiece(MOVE *move)
+int GetMovePromPiece(int move)
 {
 	int promPiece;
 	
-	promPiece = move->move & 0x78;
+	promPiece = move & 0x78;
 	promPiece >>= 3;
 	
 	return promPiece;
 }
 
 
-int GetMovePawnStartFlag(MOVE *move)
+int GetMovePawnStartFlag(int move)
 {
 	int pawnStart;
 	
-	pawnStart = move->move & 4;
+	pawnStart = move & 4;
 	pawnStart >>= 2;
 	
 	return pawnStart;
 }
 
 
-int GetMoveEnPassantFlag(MOVE *move)
+int GetMoveEnPassantFlag(int move)
 {
 	int enPassant;
 	
-	enPassant = move->move & 2;
+	enPassant = move & 2;
 	enPassant >>= 1;
 	
 	return enPassant;
 }
 
 
-int GetMoveCastleFlag(MOVE *move)
+int GetMoveCastleFlag(int move)
 {	
-	return move->move & 1;	
+	return move & 1;	
 }
 
 
-void PrintMoveBinary(MOVE *move)
+void PrintMoveBinary(int move)
 {
 	int fourCount = -1;
 
-	//for(int i = 0; i < 32; ++i)
 	for(int i = 31; i >= 0; i--)
 	{
 		fourCount++;
@@ -115,7 +118,7 @@ void PrintMoveBinary(MOVE *move)
 			fourCount = 0;
 		}
 		
-		if((move->move >> i) & 1)
+		if((move >> i) & 1)
 			printf("1");
 		
 		else
@@ -126,7 +129,7 @@ void PrintMoveBinary(MOVE *move)
 }
 
 
-void PrintMove(MOVE *move)
+void PrintMove(int move)
 {
 	int fromSq = GetMoveSource(move);
 	int toSq = GetMoveTarget(move);
@@ -135,12 +138,24 @@ void PrintMove(MOVE *move)
 	int pawnStart = GetMovePawnStartFlag(move);
 	int castle = GetMoveCastleFlag(move);
 	
+	printf("  ");
+	
 	PrintSquare(fromSq);
 	PrintSquare(toSq);
 	PrintPromotedPiece(promPiece);
 	
-	printf("    pawn start: %d;  en passant: %d;  castle: %d\n", pawnStart, enPass, castle);
+	printf("	pawn start: %d;  en passant: %d;  castle: %d\n", pawnStart, enPass, castle);
 }
 
+
+void PrintMoveList(MOVELIST *movelist)
+{
+	for(int moveCount = 0; moveCount < movelist->moveCount; ++moveCount)
+	{
+		PrintMove(movelist->moves[moveCount].move);
+	}
+	
+	printf("\n  Total moves: %d\n\n", movelist->moveCount);
+}
 
 

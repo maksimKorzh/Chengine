@@ -64,7 +64,7 @@ enum castling
 
 typedef struct
 {
-	unsigned int move;
+	int move;
 	int score;
 }
 
@@ -72,8 +72,8 @@ MOVE;
 
 typedef struct
 {
-	MOVE move[256];
-	int count;
+	MOVE moves[256];
+	int moveCount;
 }
 
 MOVELIST;
@@ -110,15 +110,19 @@ extern int IsSquareAttacked(CHESSBOARD *board, int sq, int side);
 extern void PrintAttackBoard(CHESSBOARD *board, int side);
 
 // move.c
-extern void SetMove(MOVE *move, int fromSq, int toSq, int promPiece, int pawnFlag, int enPassantFlag, int castleFlag);
-extern int GetMoveSource(MOVE *move);
-extern int GetMoveTarget(MOVE *move);
-extern int GetMovePromPiece(MOVE *move);
-extern int GetMovePawnStartFlag(MOVE *move);
-extern int GetMoveEnPassantFlag(MOVE *move);
-extern int GetMoveCastleFlag(MOVE *move);
-extern void PrintMoveBinary(MOVE *move);
-extern void PrintMove(MOVE *move);
+extern int SetMove(int fromSq, int toSq, int promPiece, int pawnFlag, int enPassantFlag, int castleFlag);
+extern int GetMoveSource(int move);
+extern int GetMoveTarget(int move);
+extern int GetMovePromPiece(int move);
+extern int GetMovePawnStartFlag(int move);
+extern int GetMoveEnPassantFlag(int move);
+extern int GetMoveCastleFlag(int move);
+extern void PrintMoveBinary(int move);
+extern void PrintMove(int move);
+extern void PrintMoveList(MOVELIST *movelist);
+
+// movegen.c
+extern void AddMove(MOVELIST *movelist, int move);
 
 
 #endif

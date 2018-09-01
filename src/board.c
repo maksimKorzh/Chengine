@@ -125,7 +125,13 @@ void ParseFen(CHESSBOARD *board, char *fen)
 
 void PrintSquare(int sq)
 {
-	assert(!(sq & 0x88));
+	assert((sq == -99) || !(sq & 0x88));
+	
+	if(sq == -99)
+	{
+		printf("no");
+		return;
+	}
 	
 	char file = (sq & 7) + 'a';
 	char rank = (sq >> 4) + '1';
@@ -136,7 +142,7 @@ void PrintSquare(int sq)
 
 void PrintPromotedPiece(int piece)
 {
-	assert((piece >= wN && piece <= wQ) || (piece >= bN && piece <= bQ));
+	assert((piece >= wN && piece <= wQ) || (piece >= bN && piece <= bQ) || piece == 0);
 	
 	switch(piece)
 	{
@@ -151,6 +157,8 @@ void PrintPromotedPiece(int piece)
 		
 		case wQ:
 		case bQ: printf("q"); break;
+		
+		default: break;
 	}
 	
 }
@@ -220,13 +228,17 @@ void PrintBoard(CHESSBOARD *board)
 	printf("\n     a  b  c  d  e  f  g  h\n\n");
 	
 	printf("     Side:            %s\n", board->side == white ? "white" : "black");
-	printf("     EnPassant:          %d\n", board->enPassant);
+	
+	printf("     EnPassant:          ");
+	PrintSquare(board->enPassant);
+	printf("\n");
+	
 	printf("     Castling:         %c%c%c%c\n", board->castling & wk ? 'K' : '-',
 												board->castling & wq ? 'Q' : '-',
 												board->castling & bk ? 'k' : '-',
 												board->castling & bq ? 'q' : '-');
 	
-	printf("\n");	
+	printf("\n\n");	
 }
 
 
