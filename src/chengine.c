@@ -9,12 +9,15 @@ int main()
 	
 	PrintPosition(board);
 	PrintBoard(board);
-	PrintAttackBoard(board, black);
+	//PrintAttackBoard(board, black);
 	
-	unsigned int a = 0xf0ffffff;
+	MOVE move[1];
+	move->move = 0;
 	
-	PrintMoveBinary(8);
+	SetMove(move, e7, e8, wQ, 1, 1, 1);
 	
+	PrintMoveBinary(move);
+	PrintMove(move);
 	
 	
 	return 0;

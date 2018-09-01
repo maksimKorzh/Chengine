@@ -134,34 +134,25 @@ void PrintSquare(int sq)
 }
 
 
-void PrintMove(unsigned int move)
+void PrintPromotedPiece(int piece)
 {
-	printf("0x%x\n", move);
-}
-
-
-void PrintMoveBinary(unsigned int move)
-{
-	int fourCount = -1;
-
-	for(int i = 31; i >= 0; i--)
+	assert((piece >= wN && piece <= wQ) || (piece >= bN && piece <= bQ));
+	
+	switch(piece)
 	{
-		fourCount++;
+		case wN:
+		case bN: printf("n"); break;
 		
-		if(fourCount == 4)
-		{
-			printf(" ");
-			fourCount = 0;
-		}
+		case wB:
+		case bB: printf("b"); break;
 		
-		if((move >> i) & 1)
-			printf("1");
+		case wR:
+		case bR: printf("r"); break;
 		
-		else
-			printf("0");
+		case wQ:
+		case bQ: printf("q"); break;
 	}
 	
-	printf("\n");
 }
 
 

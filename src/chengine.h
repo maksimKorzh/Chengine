@@ -62,15 +62,6 @@ enum castling
 	bq = 8
 };
 
-
-// Move format
-
-/*
-
- 0000 0000 0111 1111	fromSq     (0x7f)
- 0011 1111 1000 0000	toSq >> 7, (0x3f)
-*/
-
 typedef struct
 {
 	unsigned int move;
@@ -109,8 +100,7 @@ extern int rookAttacks[4];
 // board.c
 extern void InitBoard(CHESSBOARD *board);
 extern void PrintSquare(int sq);
-extern void PrintMove(unsigned int move);
-extern void PrintMoveBinary(unsigned int move);
+extern void PrintPromotedPiece(int piece);
 extern void ParseFen(CHESSBOARD *board, char *fen);
 extern void PrintPosition(CHESSBOARD *board);
 extern void PrintBoard(CHESSBOARD *board);
@@ -118,6 +108,17 @@ extern void PrintBoard(CHESSBOARD *board);
 // attack.c
 extern int IsSquareAttacked(CHESSBOARD *board, int sq, int side);
 extern void PrintAttackBoard(CHESSBOARD *board, int side);
+
+// move.c
+extern void SetMove(MOVE *move, int fromSq, int toSq, int promPiece, int pawnFlag, int enPassantFlag, int castleFlag);
+extern int GetMoveSource(MOVE *move);
+extern int GetMoveTarget(MOVE *move);
+extern int GetMovePromPiece(MOVE *move);
+extern int GetMovePawnStartFlag(MOVE *move);
+extern int GetMoveEnPassantFlag(MOVE *move);
+extern int GetMoveCastleFlag(MOVE *move);
+extern void PrintMoveBinary(MOVE *move);
+extern void PrintMove(MOVE *move);
 
 
 #endif
