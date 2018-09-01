@@ -10,8 +10,8 @@ int IsSquareAttacked(CHESSBOARD *board, int sq, int side)
 {
 	assert(!(sq & 0x88));
 
-	// by pawns
-	if(side == white)
+	// by pawns (might be a bug here...)
+	/*if(side == white)
 	{
 		if(!((sq - 17) & 0x88) || !((sq - 15) & 0x88))
 		{
@@ -33,6 +33,25 @@ int IsSquareAttacked(CHESSBOARD *board, int sq, int side)
 				return 1;
 			}
 		}
+	}*/
+	
+	// by pawns
+	if(side == white)
+	{
+		if(!((sq - 15) & 0x88) && (board->position[sq - 15] == wP))
+			return 1;
+			
+		if(!((sq - 17) & 0x88) && (board->position[sq - 17] == wP))
+			return 1;
+	}
+	
+	else
+	{
+		if(!((sq + 15) & 0x88) && (board->position[sq + 15] == bP))
+			return 1;
+			
+		if(!((sq + 17) & 0x88) && (board->position[sq + 17] == bP))
+			return 1;
 	}
 
 	// by knights

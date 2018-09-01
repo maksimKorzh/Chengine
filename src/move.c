@@ -144,7 +144,7 @@ void PrintMove(int move)
 	PrintSquare(toSq);
 	PrintPromotedPiece(promPiece);
 	
-	printf("	pawn start: %d;  en passant: %d;  castle: %d\n", pawnStart, enPass, castle);
+	printf("	pawn start: %d;  en passant: %d;  castle: %d", pawnStart, enPass, castle);
 }
 
 
@@ -153,6 +153,7 @@ void PrintMoveList(MOVELIST *movelist)
 	for(int moveCount = 0; moveCount < movelist->moveCount; ++moveCount)
 	{
 		PrintMove(movelist->moves[moveCount].move);
+		printf("	SCORE: %d\n", movelist->moves[moveCount].score);
 	}
 	
 	printf("\n  Total moves: %d\n\n", movelist->moveCount);
