@@ -17,6 +17,7 @@
 
 #define whitePawnMoves "rnbqkb1r/pp1p1pPp/8/2p1pP2/1P1P4/3P3P/P1P1P3/RNBQKBNR w KQkq e6 0 1" // 26 possible moves
 #define blackPawnMoves "rnbqkbnr/p1p1p3/3p3p/1p1p4/2P1Pp2/8/PP1P1PpP/RNBQKB1R b KQkq e3 0 1" // 26 possible moves
+#define castleMoves "r3k2r/8/8/8/8/8/8/R3K2R b KQkq - 0 1 "
 
 enum side
 {
@@ -93,6 +94,7 @@ typedef struct
 
 CHESSBOARD;
 
+extern int pawnAttacks[4];
 extern int knightAttacks[8];
 extern int kingAttacks[8];
 extern int bishopAttacks[4];

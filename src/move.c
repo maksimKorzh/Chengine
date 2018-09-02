@@ -5,12 +5,12 @@
 
 /*
   
- 0000 0001 1111 1100 0000 0000 0000		source square		0x1fc000
- 0000 0000 0000 0011 1111 1000 0000		target square		0x3f80
- 0000 0000 0000 0000 0000 0111 1000		promoted piece		0x78
- 0000 0000 0000 0000 0000 0000 0100		pawn start flag		0x4
- 0000 0000 0000 0000 0000 0000 0010		en passant flag		0x2
- 0000 0000 0000 0000 0000 0000 0001		castling flag		0x1
+ 0001 1111 1100 0000 0000 0000		source square		0x1fc000
+ 0000 0000 0011 1111 1000 0000		target square		0x3f80
+ 0000 0000 0000 0000 0111 1000		promoted piece		0x78
+ 0000 0000 0000 0000 0000 0100		pawn start flag		0x4
+ 0000 0000 0000 0000 0000 0010		en passant flag		0x2
+ 0000 0000 0000 0000 0000 0001		castling flag		0x1
 
 */
 
@@ -144,7 +144,7 @@ void PrintMove(int move)
 	PrintSquare(toSq);
 	PrintPromotedPiece(promPiece);
 	
-	printf("	pawn start: %d;  en passant: %d;  castle: %d", pawnStart, enPass, castle);
+	printf("	  pawn start: %d;  en passant: %d;  castle: %d", pawnStart, enPass, castle);
 }
 
 

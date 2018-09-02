@@ -1,6 +1,7 @@
 #include "chengine.h"
 
 
+int pawnAttacks[4] = {15, 17, -15, -17};
 int knightAttacks[8] = {31, 33, 14, 18, -31, -33, -14, -18};
 int kingAttacks[8] = {1, 15, 16, 17, -1, -15, -16, -17};
 int bishopAttacks[4] = {15, 17, -15, -17};
@@ -10,31 +11,6 @@ int IsSquareAttacked(CHESSBOARD *board, int sq, int side)
 {
 	assert(!(sq & 0x88));
 
-	// by pawns (might be a bug here...)
-	/*if(side == white)
-	{
-		if(!((sq - 17) & 0x88) || !((sq - 15) & 0x88))
-		{
-			if(board->position[sq - 17] == wP || board->position[sq - 15] == wP)
-			{
-				assert(!((sq - 17) & 0x88) || !((sq - 15) & 0x88));
-				return 1;
-			}
-		}
-	}
-	
-	else
-	{
-		if(!((sq + 17) & 0x88) || !((sq + 15) & 0x88))
-		{
-			if(board->position[sq + 17] == bP || board->position[sq + 15] == bP)
-			{
-				assert(!((sq + 17) & 0x88) || !((sq + 15) & 0x88));
-				return 1;
-			}
-		}
-	}*/
-	
 	// by pawns
 	if(side == white)
 	{

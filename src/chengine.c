@@ -5,11 +5,11 @@ int main()
 {
 	CHESSBOARD board[1];
 	
-	ParseFen(board, whitePawnMoves);
+	ParseFen(board, "8/8/8/3n4/8/2k1K3/8/8 b - - 0 1 ");
 	
 	PrintPosition(board);
 	PrintBoard(board);
-	PrintAttackBoard(board, white);
+	//PrintAttackBoard(board, white);
 	
 	MOVELIST list[1];
 	list->moveCount = 0;
