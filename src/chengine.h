@@ -3,13 +3,16 @@
 
 
 #include <stdio.h>
+#include "sys/time.h"
 
 
 #define DEBUG
 
-#ifdef DEBUG
-	
+#ifdef DEBUG	
 	#include <assert.h>
+
+#else
+	#define assert(n)
 
 #endif
 
@@ -96,11 +99,11 @@ typedef struct
 
 CHESSBOARD;
 
-extern int pawnAttacks[4];
-extern int knightAttacks[8];
-extern int kingAttacks[8];
-extern int bishopAttacks[4];
-extern int rookAttacks[4];
+extern const int pawnAttacks[4];
+extern const int knightAttacks[8];
+extern const int kingAttacks[8];
+extern const int bishopAttacks[4];
+extern const int rookAttacks[4];
 
 // functions
 
@@ -130,6 +133,17 @@ extern void PrintMoveList(MOVELIST *movelist);
 
 // movegen.c
 extern void GenerateMoves(CHESSBOARD *board, MOVELIST *list);
+
+// makemove.c
+extern int InCheck(CHESSBOARD *board, int side);
+extern int MakeMove(CHESSBOARD *board, int move);
+extern void TakeBack(CHESSBOARD *board, CHESSBOARD *boardStored);
+
+// perft.c
+extern void PerftTest(CHESSBOARD *board, int depth);
+
+// misc.c
+extern int GetTimeMs();
 
 
 #endif

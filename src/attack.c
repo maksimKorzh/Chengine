@@ -1,11 +1,11 @@
 #include "chengine.h"
 
 
-int pawnAttacks[4] = {15, 17, -15, -17};
-int knightAttacks[8] = {31, 33, 14, 18, -31, -33, -14, -18};
-int kingAttacks[8] = {1, 15, 16, 17, -1, -15, -16, -17};
-int bishopAttacks[4] = {15, 17, -15, -17};
-int rookAttacks[4] = {1, 16, -1, -16};
+const int pawnAttacks[4] = {15, 17, -15, -17};
+const int knightAttacks[8] = {31, 33, 14, 18, -31, -33, -14, -18};
+const int kingAttacks[8] = {1, 15, 16, 17, -1, -15, -16, -17};
+const int bishopAttacks[4] = {15, 17, -15, -17};
+const int rookAttacks[4] = {1, 16, -1, -16};
 
 int IsSquareAttacked(CHESSBOARD *board, int sq, int side)
 {

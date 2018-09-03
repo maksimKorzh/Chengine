@@ -17,6 +17,8 @@ void GenerateMoves(CHESSBOARD *board, MOVELIST *list)
 {
 	int side = board->side;
 	
+	list->moveCount = 0;
+	
 	for(int sq = 0; sq < 128; ++sq)
 	{
 		if(!(sq & 0x88))
@@ -202,8 +204,11 @@ void GenerateMoves(CHESSBOARD *board, MOVELIST *list)
 			}
 			
 			// bishops and queens
-			if(side ? (board->position[fromSq] == bB) || (board->position[fromSq] == bQ) :
-						(board->position[fromSq] == wB) || (board->position[fromSq] == wQ))
+			if(	side ? 
+					(board->position[fromSq] == bB) || (board->position[fromSq] == bQ) :
+					(board->position[fromSq] == wB) || (board->position[fromSq] == wQ)
+			)
+			
 			{
 				for(int i = 0; i < 4; ++i)
 				{
@@ -233,8 +238,11 @@ void GenerateMoves(CHESSBOARD *board, MOVELIST *list)
 			}
 			
 			// rooks and queens
-			if(side ? (board->position[fromSq] == bR) || (board->position[fromSq] == bQ) :
-						(board->position[fromSq] == wR) || (board->position[fromSq] == wQ))
+			if( side ? 
+					(board->position[fromSq] == bR) || (board->position[fromSq] == bQ) :
+					(board->position[fromSq] == wR) || (board->position[fromSq] == wQ)
+			)
+			
 			{
 				for(int i = 0; i < 4; ++i)
 				{

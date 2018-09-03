@@ -144,7 +144,7 @@ void PrintMove(int move)
 	PrintSquare(toSq);
 	PrintPromotedPiece(promPiece);
 	
-	printf("	  pawn start: %d;  en passant: %d;  castle: %d", pawnStart, enPass, castle);
+	//printf("	  pawn start: %d;  en passant: %d;  castle: %d", pawnStart, enPass, castle);
 }
 
 

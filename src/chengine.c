@@ -5,19 +5,13 @@ int main()
 {
 	CHESSBOARD board[1];
 	
-	ParseFen(board, trickyPos);
+	ParseFen(board, initPos);
 	
-	PrintPosition(board);
-	PrintBoard(board);
-	//PrintAttackBoard(board, white);
+	//MOVELIST list[1];
 	
-	MOVELIST list[1];
-	list->moveCount = 0;
+	//PrintBoard(board);
+	PerftTest(board, 3);
 	
-	GenerateMoves(board, list);
-	
-	
-	PrintMoveList(list);
 	
 	
 	return 0;
