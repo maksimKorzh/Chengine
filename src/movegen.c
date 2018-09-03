@@ -5,7 +5,7 @@
 #define isWhitePiece(toSq) (board->position[toSq] >= wP && board->position[toSq] <= wK)
 
 
-void AddMove(MOVELIST *list, int move)
+static void AddMove(MOVELIST *list, int move)
 {
 	list->moves[list->moveCount].move = move;
 	list->moves[list->moveCount].score = 0;
@@ -189,6 +189,86 @@ void GenerateMoves(CHESSBOARD *board, MOVELIST *list)
 				for(int i = 0; i < 8; ++i)
 				{
 					int dir = sq + knightAttacks[i];
+					int delta = board->position[dir];
+		
+					if(!(dir & 0x88))
+					{
+						if(side ? (delta == emSq || isWhitePiece(dir)) : (delta == emSq || isBlackPiece(dir)))
+						{
+							AddMove(list, SetMove(fromSq, dir, 0, 0, 0, 0));
+						}
+					}
+				}
+			}
+			
+			// bishops and queens
+			if(side ? (board->position[fromSq] == bB) || (board->position[fromSq] == bQ) :
+						(board->position[fromSq] == wB) || (board->position[fromSq] == wQ))
+			{
+				for(int i = 0; i < 4; ++i)
+				{
+					int dir = sq + bishopAttacks[i];
+		
+					while(!(dir & 0x88))
+					{
+						int delta = board->position[dir];
+			
+						if(side ? isBlackPiece(dir) : isWhitePiece(dir))
+							break;
+								
+						else if(side ? isWhitePiece(dir) : isBlackPiece(dir))
+						{
+							AddMove(list, SetMove(fromSq, dir, 0, 0, 0, 0));
+							break;
+						}
+			
+						else if(delta == emSq)
+						{		
+							AddMove(list, SetMove(fromSq, dir, 0, 0, 0, 0));
+						}
+			
+						dir += bishopAttacks[i];
+					}
+				}
+			}
+			
+			// rooks and queens
+			if(side ? (board->position[fromSq] == bR) || (board->position[fromSq] == bQ) :
+						(board->position[fromSq] == wR) || (board->position[fromSq] == wQ))
+			{
+				for(int i = 0; i < 4; ++i)
+				{
+					int dir = sq + rookAttacks[i];
+		
+					while(!(dir & 0x88))
+					{
+						int delta = board->position[dir];
+			
+						if(side ? isBlackPiece(dir) : isWhitePiece(dir))
+							break;
+								
+						else if(side ? isWhitePiece(dir) : isBlackPiece(dir))
+						{
+							AddMove(list, SetMove(fromSq, dir, 0, 0, 0, 0));
+							break;
+						}
+			
+						else if(delta == emSq)
+						{		
+							AddMove(list, SetMove(fromSq, dir, 0, 0, 0, 0));
+						}
+			
+						dir += rookAttacks[i];
+					}
+				}
+			}
+			
+			// kings
+			if(side ? board->position[fromSq] == bK : board->position[fromSq] == wK)
+			{
+				for(int i = 0; i < 8; ++i)
+				{
+					int dir = sq + kingAttacks[i];
 					int delta = board->position[dir];
 		
 					if(!(dir & 0x88))

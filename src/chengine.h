@@ -8,7 +8,9 @@
 #define DEBUG
 
 #ifdef DEBUG
+	
 	#include <assert.h>
+
 #endif
 
 
@@ -127,7 +129,6 @@ extern void PrintMove(int move);
 extern void PrintMoveList(MOVELIST *movelist);
 
 // movegen.c
-extern void AddMove(MOVELIST *movelist, int move);
 extern void GenerateMoves(CHESSBOARD *board, MOVELIST *list);
 
 

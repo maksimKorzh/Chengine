@@ -5,7 +5,7 @@ int main()
 {
 	CHESSBOARD board[1];
 	
-	ParseFen(board, "8/8/8/3n4/8/2k1K3/8/8 b - - 0 1 ");
+	ParseFen(board, trickyPos);
 	
 	PrintPosition(board);
 	PrintBoard(board);
