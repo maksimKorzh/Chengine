@@ -61,6 +61,8 @@ int MakeMove(CHESSBOARD *board, int move)
 		board->enPassant = noSq;
 	}
 	
+	board->enPassant = noSq;
+	
 	// pawn start flag
 	if(GetMovePawnStartFlag(move))
 	{

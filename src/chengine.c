@@ -4,15 +4,9 @@
 int main()
 {
 	CHESSBOARD board[1];
+	ParseFen(board, trickyPos);
 	
-	ParseFen(board, initPos);
-	
-	//MOVELIST list[1];
-	
-	//PrintBoard(board);
-	PerftTest(board, 3);
-	
-	
+	PerftTest(board, 4);
 	
 	return 0;
 }

@@ -21,6 +21,10 @@ void Perft(CHESSBOARD *board, int depth)
 	
 		if(!MakeMove(board, list->moves[moveNum].move))
 			continue;
+		
+		//getchar();
+		//PrintBoard(board);
+		//PrintMoveList(list);
 			
 		Perft(board, depth - 1);
 		TakeBack(board, boardStored);
@@ -51,11 +55,10 @@ void PerftTest(CHESSBOARD *board, int depth)
 		boardStored[0] = board[0];
 		
 		if(!MakeMove(board, move))
-			continue;
-			
-		getchar();
-		PrintBoard(board);
-		//PrintMoveList(list);	
+			continue;	
+		
+		if(GetMoveSource(list->moves[moveNum].move) == a7 && GetMoveTarget(list->moves[moveNum].move) == a6)	
+			PrintBoard(board);
 		
 		long cumnodes = nodes;
 		

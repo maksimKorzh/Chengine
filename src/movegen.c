@@ -57,10 +57,16 @@ void GenerateMoves(CHESSBOARD *board, MOVELIST *list)
 						int dir = fromSq + pawnAttacks[i];
 					
 						// en passant move
-						if(board->enPassant != noSq)
+						if(pawnAttacks[i] > 0 && !(dir & 0x88))
 						{
-							if(dir == board->enPassant)
-								AddMove(list, SetMove(fromSq, dir, 0, 0, 1, 0));
+							if(board->enPassant != noSq)
+							{
+								if(dir == board->enPassant)
+								{
+									//assert(board->enPassant > dir);
+									AddMove(list, SetMove(fromSq, dir, 0, 0, 1, 0));
+								}
+							}
 						}
 					
 						if((pawnAttacks[i] > 0) && !(dir & 0x88) && isBlackPiece(dir))
@@ -137,10 +143,13 @@ void GenerateMoves(CHESSBOARD *board, MOVELIST *list)
 						int dir = fromSq + pawnAttacks[i];
 					
 						// en passant move
-						if(board->enPassant != noSq)
+						if(pawnAttacks[i] < 0 && !(dir & 0x88))
 						{
-							if(dir == board->enPassant)
-								AddMove(list, SetMove(fromSq, dir, 0, 0, 1, 0));
+							if(board->enPassant != noSq)
+							{
+								if(dir == board->enPassant)
+									AddMove(list, SetMove(fromSq, dir, 0, 0, 1, 0));
+							}
 						}
 					
 						if((pawnAttacks[i] < 0) && !(dir & 0x88) && isWhitePiece(dir))
