@@ -138,7 +138,6 @@ extern void GenerateMoves(CHESSBOARD *board, MOVELIST *list);
 
 // makemove.c
 extern int InCheck(CHESSBOARD *board, int side);
-extern int UnderAttack(CHESSBOARD *board, int side);
 extern int MakeMove(CHESSBOARD *board, int move);
 extern void TakeBack(CHESSBOARD *board, CHESSBOARD *boardStored);
 

@@ -2,7 +2,7 @@
 
 int NegaMaxSearch(CHESSBOARD *board, int depth)
 {
-	if(InCheck(board, board->side)/* || UnderAttack(board, board->side)*/)
+	if(InCheck(board, board->side))
 		depth++;
 
 	if ( depth == 0 )
