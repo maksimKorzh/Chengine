@@ -1,5 +1,5 @@
 # chengine
-Minimalist UCI chess engine
+Minimalist UCI chess engine for linux
 
 	Features:
 
@@ -10,11 +10,11 @@ Minimalist UCI chess engine
 		
 	After for about a three years of researching how
 	does particularly a chess engine works and numerous
-	unsuccessful attempts to write one own I've finally
+	unsuccessful attempts to write my own I've finally
 	managed to complete one.
 	
 	Chengine is very slow and weak engine due to the lack of
-	piece lists, king square and material tracking. the brute
+	piece lists, king square and material tracking. The brute
 	force nega max search doesn't cut any garbage branches, so
 	it takes ages to get the best move even at depth 6, but
 	nevertheless it is already a complete engine to play chess.
@@ -27,4 +27,17 @@ Minimalist UCI chess engine
 	YouTube being inpired by Bluefever's VICE.
 	
 	I appriciate any feedbacks at freesoft.for.people@gmail.com
+
+# compile
+
+	- compile it with GCC;
+	- cd into src folder
+	- type "make" and that's it
+	
+	the output file would be "chengine"
+	with no extension
+	
+# GUI
+
+	Tested with Arena for linux 
 		
