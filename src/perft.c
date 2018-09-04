@@ -57,9 +57,6 @@ void PerftTest(CHESSBOARD *board, int depth)
 		if(!MakeMove(board, move))
 			continue;	
 		
-		if(GetMoveSource(list->moves[moveNum].move) == a7 && GetMoveTarget(list->moves[moveNum].move) == a6)	
-			PrintBoard(board);
-		
 		long cumnodes = nodes;
 		
 		Perft(board, depth - 1);

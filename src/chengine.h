@@ -10,10 +10,10 @@
 
 #ifdef DEBUG	
 	#include <assert.h>
+#endif
 
-#else
+#ifndef DEBUG
 	#define assert(n)
-
 #endif
 
 
@@ -144,6 +144,14 @@ extern void PerftTest(CHESSBOARD *board, int depth);
 
 // misc.c
 extern int GetTimeMs();
+
+// eval
+extern int EvaluatePosition(CHESSBOARD *board);
+
+// search
+extern MOVE SearchPosition(CHESSBOARD *board, int depth);
+
+// uci
 
 
 #endif
