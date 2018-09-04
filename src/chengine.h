@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include "sys/time.h"
+#include "string.h"
 
 
 #define DEBUG
@@ -112,6 +113,7 @@ extern void InitBoard(CHESSBOARD *board);
 extern void PrintSquare(int sq);
 extern void PrintPromotedPiece(int piece);
 extern void ParseFen(CHESSBOARD *board, char *fen);
+extern int ParseMove(CHESSBOARD *board, char *moveStr);
 extern void PrintPosition(CHESSBOARD *board);
 extern void PrintBoard(CHESSBOARD *board);
 
@@ -136,6 +138,7 @@ extern void GenerateMoves(CHESSBOARD *board, MOVELIST *list);
 
 // makemove.c
 extern int InCheck(CHESSBOARD *board, int side);
+extern int UnderAttack(CHESSBOARD *board, int side);
 extern int MakeMove(CHESSBOARD *board, int move);
 extern void TakeBack(CHESSBOARD *board, CHESSBOARD *boardStored);
 
@@ -149,10 +152,10 @@ extern int GetTimeMs();
 extern int EvaluatePosition(CHESSBOARD *board);
 
 // search
-extern MOVE SearchPosition(CHESSBOARD *board, int depth);
+extern void SearchPosition(CHESSBOARD *board, int depth);
 
 // uci
-
+extern void UciLoop(CHESSBOARD *board);
 
 #endif
 

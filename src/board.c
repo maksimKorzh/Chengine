@@ -72,6 +72,7 @@ void ParseFen(CHESSBOARD *board, char *fen)
 						int empty = rank * 16 - file;
 						board->position[empty] = emSq;	
 					}*/
+					
 					file -= count;
 					
 					*fen++;
@@ -120,6 +121,50 @@ void ParseFen(CHESSBOARD *board, char *fen)
 		
 		board->enPassant = enPassant;
 	}
+}
+
+
+int ParseMove(CHESSBOARD *board, char *moveStr)
+{
+	MOVELIST list[1];
+	GenerateMoves(board, list);
+
+	int parseFrom = (moveStr[0] - 'a') + (moveStr[1] - '0' - 1) * 16;
+	int parseTo = (moveStr[2] - 'a') + (moveStr[3] - '0' - 1) * 16;
+	int promPiece = 0;
+	
+	int move;
+	
+	for(int moveNum = 0; moveNum < list->moveCount; ++moveNum)
+	{
+		move = list->moves[moveNum].move;
+		
+		if(GetMoveSource(move) == parseFrom && GetMoveTarget(move) == parseTo)
+		{
+			promPiece = GetMovePromPiece(move);
+			
+			if(promPiece)
+			{	
+				if((promPiece == wN || promPiece == bN) && moveStr[4] == 'n')
+					return move;
+					
+				else if((promPiece == wB || promPiece == bB) && moveStr[4] == 'b')
+					return move;
+					
+				else if((promPiece == wR || promPiece == bR) && moveStr[4] == 'r')
+					return move;
+					
+				else if((promPiece == wQ || promPiece == bQ) && moveStr[4] == 'q')
+					return move;
+					
+				continue;
+			}
+		
+			return move;
+		}
+	}
+	
+	return 0;
 }
 
 

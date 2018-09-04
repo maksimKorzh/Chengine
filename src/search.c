@@ -2,9 +2,13 @@
 
 int NegaMaxSearch(CHESSBOARD *board, int depth)
 {
+	if(InCheck(board, board->side)/* || UnderAttack(board, board->side)*/)
+		depth++;
+
 	if ( depth == 0 )
-		return EvaluatePosition(board);
+		return EvaluatePosition(board);	
 	
+	int legalMoves = 0;
 	int bestScore = -50000;
 	
 	MOVELIST list[1];
@@ -18,6 +22,7 @@ int NegaMaxSearch(CHESSBOARD *board, int depth)
 		if(!MakeMove(board, list->moves[moveNum].move))
 			continue;
 		
+		legalMoves++;
 		int score = -NegaMaxSearch(board, depth - 1);
 		
 		if(score > bestScore)
@@ -26,12 +31,17 @@ int NegaMaxSearch(CHESSBOARD *board, int depth)
 		TakeBack(board, boardStored);
 	}
 	
-	return bestScore;
+	// checkmate detection
+	if(!legalMoves && InCheck(board, board->side))
+		return -100000;
+	else
+		return bestScore;
 }
 
-MOVE SearchPosition(CHESSBOARD *board, int depth)
+void SearchPosition(CHESSBOARD *board, int depth)
 {
 	int bestScore = -50000;
+	int legalMoves = 0;
 
 	MOVELIST list[1];
 	GenerateMoves(board, list);
@@ -46,20 +56,29 @@ MOVE SearchPosition(CHESSBOARD *board, int depth)
 		if(!MakeMove(board, list->moves[moveNum].move))
 			continue;
 			
+		legalMoves++;	
 		int score = -NegaMaxSearch(board, depth - 1);
 		
 		if(score > bestScore)
 		{
 			bestScore = score;
 		
+			
 			bestMove.move = list->moves[moveNum].move;
-			bestMove.score = bestScore;
+			bestMove.score = bestScore;	
 		}
 		
 		TakeBack(board, boardStored);
 	}
 	
-	return bestMove;	
+	if(legalMoves)
+	{
+		printf("info score cp %d depth %d\n", bestMove.score, depth);
+	
+		printf("bestmove ");
+		PrintMove(bestMove.move);
+		printf("\n");
+	}	
 }
 
 

@@ -1,6 +1,10 @@
 #include "chengine.h"
 
 
+#define isBlack(toSq) (board->position[toSq] >= bN && board->position[toSq] <= bQ)
+#define isWhite(toSq) (board->position[toSq] >= wN && board->position[toSq] <= wQ)
+
+
 const int castling[128] = 
 {
 	13, 15, 15, 15, 12, 15, 15, 14, 8, 8, 8, 8, 8, 8, 8, 8,
@@ -28,6 +32,22 @@ int InCheck(CHESSBOARD *board, int side)
 	}
 	
 	return IsSquareAttacked(board, kingSq, side ^ 1);
+}
+
+int UnderAttack(CHESSBOARD *board, int side)
+{
+	int attackedPiece = noSq;
+
+	for(int sq = 0; sq < 128; ++sq)
+	{
+		if(side ? isBlack(sq) : isWhite(sq))
+		{
+			attackedPiece = sq;
+			break;
+		}
+	}
+	
+	return IsSquareAttacked(board, attackedPiece, side ^ 1);
 }
 
 
