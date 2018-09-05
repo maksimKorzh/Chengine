@@ -43,6 +43,18 @@ const int whiteBishops[128] =
 	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0
 };
 
+const int whiteKings[128] = 
+{
+	0,   0,  20,   0, -10,   0,  30,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0
+};
+
 
 const int blackPawns[128] = 
 {
@@ -80,6 +92,18 @@ const int blackBishops[128] =
 	0,   0,  10,   0,   0,  10,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0
 };
 
+const int blackKings[128] = 
+{
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+    0,   0,   0,   0,   0,   0,   0,   0,   0, 0, 0, 0, 0, 0, 0, 0,
+	0,   0, -20,   0,  10,   0, -30,   0,   0, 0, 0, 0, 0, 0, 0, 0
+};
+
 
 int EvaluatePosition(CHESSBOARD *board)
 {
@@ -109,6 +133,10 @@ int EvaluatePosition(CHESSBOARD *board)
 						score += whiteBishops[sq];
 						break;
 						
+					case wK:
+						score += whiteKings[sq];
+						break;
+						
 						
 					case bP:
 						score += blackPawns[sq];
@@ -120,6 +148,10 @@ int EvaluatePosition(CHESSBOARD *board)
 						
 					case bB:
 						score += blackBishops[sq];
+						break;
+						
+					case bK:
+						score += blackKings[sq];
 						break;
 				}
 			}
