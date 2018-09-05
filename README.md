@@ -1,11 +1,13 @@
-# chengine
-Minimalist UCI chess engine for linux
+# Chengine
+Beginner's UCI chess engine for linux
 
 	Features:
 
 		- 0x88 board representation;
-		- material only evaluation;
-		- nega max search;
+		- move generation via calculations
+		- copy-make make move approach
+		- material and piece placement evaluation;
+		- nega max brute force search algorithm;
 		- UCI protocol with fixed depth search only;
 		
 	After for about a three years of researching how
@@ -19,16 +21,26 @@ Minimalist UCI chess engine for linux
 	it takes ages to get the best move even at depth 6, but
 	nevertheless it is already a complete engine to play chess.
 	
-	For now I have no idea how to proceed with the development.
-	There are several directions to follow such as minimize the
-	code size like in Toledo nanochess or MicroMax or try to
-	improve playing strength at least a bit or clean up the code.
-	I was even thinking about making a video tutorial series on
-	YouTube being inpired by Bluefever's VICE.
-	
 	I appriciate any feedbacks at freesoft.for.people@gmail.com
 
-# compile
+# Intents and purposes
+
+	Chengine is intended to be a source of inspiration for the
+	beginner and hobby programmers dreaming to write their own
+	bug free chess program. The very first chess engine I've
+	copy-pasted renaming the variables to get the idea how it
+	works was Bluefever's VICE which is absolutely great piece
+	of software, but still quite complicated, so I tried to write
+	something even more simple.
+	
+# Next steps
+	
+	I've finally realized the path to follow in chess engine
+	development. The idea is very simple - try to do the same
+	thing you've done before, but in less code and also try to
+	get the best performance out of a given algorithms.
+
+# Compile
 
 	- compile it with GCC;
 	- cd into src folder
@@ -39,5 +51,19 @@ Minimalist UCI chess engine for linux
 	
 # GUI
 
-	Tested with Arena for linux 
+	Tested with Arena for linux
+	
+# Credits
+
+	I want to thank the great chess engine development community
+	for providing reasonable resources, espacially to:
+		
+		-   Bluefever Software's VICE video tutorial series
+			https://www.youtube.com/playlist?list=PLZ1QII7yudbc-Ky058TEaOstZHVbT-2hg
+		
+		-   Bruce Moreland for his 0x88 board representaion explanations
+			https://web.archive.org/web/20071026130204/http://www.seanet.com/~brucemo/topics/0x88.htm
+			
+		-   Chess Programming Wiki
+			https://www.chessprogramming.org/Main_Page 
 		
