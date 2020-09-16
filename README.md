@@ -1,14 +1,21 @@
 # Chengine
 Beginner's UCI chess engine for linux
 
-	Features:
+# Features:
+  - 0x88 board representation;
+  - move generation via calculations
+  - copy-make make move approach
+  - material and piece placement evaluation;
+  - nega max brute force search algorithm;
+  - UCI protocol with fixed depth search only;
 
-		- 0x88 board representation;
-		- move generation via calculations
-		- copy-make make move approach
-		- material and piece placement evaluation;
-		- nega max brute force search algorithm;
-		- UCI protocol with fixed depth search only;
+
+# Limitations
+  - no 3 fold repetition detection
+  - no 50 move rule detection
+
+# known bugs
+  - doesn't find the closest mating line
 		
 	After for about a three years of researching how
 	does particularly a chess engine works and numerous
